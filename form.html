@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .form{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <form class="form">
+        <input type="number" id="numberBox" />
+        <label id="info"></label>
+    </form>
+    <script>
+        const numberBoxEle = document.getElementById("numberBox");
+        const infoEle = document.getElementById("info");
+
+        function getNextThreeNumbers(number){
+            let arr=[]
+            let presentVal = number
+            Array.from({ length: 3 }).forEach((_, index) => {
+                presentVal += 2
+                arr.push(presentVal)
+            });
+            return arr.join(",")
+        }
+
+        function numberBoxChangeHandler(e){
+            const EnteredNumber = parseInt(e.target.value)
+            if(EnteredNumber){
+                if(EnteredNumber < 0){
+                    infoEle.textContent = "enter a positive value"
+                }else if(EnteredNumber >= 0){
+                    infoEle.textContent = getNextThreeNumbers(EnteredNumber)
+                }
+            }else{
+                infoEle.textContent = ""
+            }
+            
+        }
+
+        numberBoxEle.addEventListener("keyup",numberBoxChangeHandler)
+
+    </script>
+</body>
+</html>
